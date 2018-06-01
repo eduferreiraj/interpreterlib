@@ -1,0 +1,3 @@
+variavel = - .2; // Aaaaaaaaaa
+y = 2 * 3;
+@variavel + @y;
