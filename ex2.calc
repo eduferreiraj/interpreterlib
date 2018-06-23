@@ -1,2 +1,1 @@
-variavel = 25 / 2; // Comentários funcionam!
-(2 + 2) ^ ((2 + 2)) / @variavel;
+floor(@pi);

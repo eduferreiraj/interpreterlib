@@ -25,10 +25,11 @@
 #         | ''
 # Expression = Expression [+-] Term
 #         | Term
-# Term = Term [*/] Factor
+# Term = Term [*/%] Factor
 #         | Factor
 # Factor = Element
 #         | '-' Element
+#         | 'sqrt' Element
 # Element = Terminal
 #         | Terminal '^' Factor
 # Terminal = {TkNum}
@@ -90,11 +91,11 @@ class SyntaxTree:
 
 
     def generate(self):
-        try:
-            return self.ruleStart(self.tkList).stabilizeSpaces()
-        except:
-            print("\nstdin: Houve algum erro, abortando.")
-            exit(-1)
+        # try:
+        return self.ruleStart(self.tkList).stabilizeSpaces()
+        # except:
+            # print("\nstdin: Houve algum erro, abortando.")
+            # exit(-1)
 
     # Terminal = {TkNum}
     #         | {TkVarAccess} {TkVar}
@@ -131,7 +132,7 @@ class SyntaxTree:
     # Factor = Element
     #         | '-' Element
     def ruleFactor(self, tkQueue):
-        if tkQueue[0].lexeme is "-":
+        if tkQueue[0].lexeme in ["-", "sqrt", "ceil", "floor", "cos", "sin"]:
             Assertions.assertSyntax(tkQueue[1:], tkQueue[0])
             return Node("Factor").addChild(Node(tkQueue[0])).addChild(self.ruleElement(tkQueue[1:]))
         return Node("Factor").addChild(self.ruleElement(tkQueue))
@@ -139,7 +140,7 @@ class SyntaxTree:
     # Term = Term [*/] Factor
     #         | Factor
     def ruleTerm(self, tkQueue):
-        valuePosition = SyntaxTree.rfind(tkQueue, "/*")
+        valuePosition = SyntaxTree.rfind(tkQueue, "/*%")
         if valuePosition:
             termTk, factorTk = tkQueue[:valuePosition], tkQueue[valuePosition + 1:]
             nodeFactor = self.ruleFactor(factorTk)
@@ -177,6 +178,7 @@ class SyntaxTree:
             tkEndPos = SyntaxTree.find(tkQueue, "TkEnd")
             Assertions.assertSemicolon(tkEndPos, tkQueue[0])
             Assertions.assertSyntax(tkQueue[2:tkEndPos], tkQueue[1])
+            Assertions.assertKeyword(tkQueue[0])
             nodeExpression = self.ruleExpression(tkQueue[2:tkEndPos])
             nodeDeclaration = Node("Declaration").addChild(Node(tkQueue[0])).addChild(Node(tkQueue[1])).addChild(nodeExpression).addChild(Node(tkQueue[tkEndPos]))
             otherDeclaration, newTkQueue = self.ruleDeclaration(tkQueue[tkEndPos + 1:])

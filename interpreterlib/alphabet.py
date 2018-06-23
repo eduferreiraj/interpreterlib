@@ -11,7 +11,7 @@ class Alphabet:
     def getEnd():
         return ";"
     def getBinaryOperators():
-        return "+-*/^"
+        return "+-*/^%"
     def getOpenParentesis():
         return "("
     def getAssignment():

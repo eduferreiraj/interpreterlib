@@ -50,7 +50,11 @@ Nesta fase você deve integrar a análise sintática com a interpretação do pr
 ### Adicionais:
 • Variáveis podem ser definidas como palavras, não só letras;   
 • Opção de Shadowing pode ser ativada colocando -s na linha de comando;   
-• Comentários de uma linha são válidos, utilizando a barra dupla "\\\\".   
+• Comentários de uma linha são válidos, utilizando a barra dupla "\\\\";    
+• Constante pi pode ser utilizada, fazendo o acesso como se fosse uma variavel: @pi;    
+• Operações unárias como sqrt, cos, sin, ceil, floor podem ser utilizadas.   
+e.g.: sqrt 4, sqrt(4), ceil(@pi).    
+
 
 #### Modo de execução:   
 • python interpretador.py ex2.calc *ou*        

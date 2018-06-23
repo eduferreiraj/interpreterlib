@@ -1,6 +1,10 @@
+# Eduardo Ferreira José, 2018
+#
+# - Arquivo interpreter.py
+# Nesse arquivo vão estar as funções que irão detectar os possiveis erros que
+# irão ocorrer durante a execução, através do assert.
 
 
-import builtins
 from .assertions import Assertions
 from .syntaxTree import SyntaxTree
 from .config import configuration

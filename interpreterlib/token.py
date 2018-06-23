@@ -19,7 +19,6 @@ class Token:
 
     def __repr__(self):
         return self.lexeme
-        # return "'{0}' on {1} [{2}]".format(str(self.lexeme), self.position, self.type)
     def __str__(self):
         return self.lexeme
 
@@ -74,7 +73,7 @@ def tokenize(content):
                 mainTk.lexeme += tkCached.pop(0).lexeme
                 appendNextToken(basicTk, tkCached)
         elif mainTk.type == "TkVar":
-            while tkCached[0].type == "TkVar":
+            while tkCached and tkCached[0].type == "TkVar":
                 mainTk.lexeme += tkCached.pop(0).lexeme
                 appendNextToken(basicTk, tkCached)
 

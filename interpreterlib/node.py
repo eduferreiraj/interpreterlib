@@ -1,4 +1,11 @@
-import sys
+# Eduardo Ferreira José, 2018
+#
+# - Arquivo node.py
+# Nesse arquivo vai estar a representação de um node da
+# árvore sintática.
+
+
+import sys, math
 from .token import Token
 from .assertions import Assertions
 from .config import configuration
@@ -45,7 +52,7 @@ class Node:
             return self.nodeName
         return self.nodeChildren[0].getTk()
 
-    def evaluate(self, variables = {}):
+    def evaluate(self, variables = {'pi':3.14159265358979323846264338327950288419716939937510582097494459230781640628620899}):
         if self.nodeName == "":
             return None
 
@@ -82,6 +89,23 @@ class Node:
         if childResult[0] == '-':
             return childResult[1] * -1
 
+        if childResult[0] == 'sqrt':
+            return math.sqrt(childResult[1])
+
+        if childResult[0] == 'ceil':
+            return math.ceil(childResult[1])
+
+        if childResult[0] == 'floor':
+            return math.floor(childResult[1])
+
+        if childResult[0] == 'cos':
+            return math.cos(childResult[1])
+
+        if childResult[0] == 'sin':
+            return math.sin(childResult[1])
+
+
+
         if childResult[0] == "(" and childResult[2] == ")":
             return childResult[1]
 
@@ -102,11 +126,15 @@ class Node:
         if childResult[1] == "^":
             return childResult[0] ** childResult[2]
 
+        if childResult[1] == "%":
+            return childResult[0] % childResult[2]
+
         if childResult[0] == "@":
             Assertions.assertUndeclaredVariable(variables, childResult[1])
             return variables[childResult[1]]
 
         if childResult[1] == "=":
+            Assertions.assertConstant(childResult[0])
             if not configuration["shadowing"]:
                 Assertions.assertDeclaredVariable(variables, childResult[0])
             variables[childResult[0]] = childResult[2]

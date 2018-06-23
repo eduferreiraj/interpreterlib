@@ -81,3 +81,19 @@ class Assertions:
             exit(-1)
         except KeyError:
             pass
+
+    def assertKeyword(tk):
+        try:
+            assert tk.lexeme not in  ["-", "sqrt", "ceil", "floor", "cos", "sin"]
+        except AssertionError:
+            print("\nstdin: (Linha {0}, Coluna {1}) Uso da palavra-chave {2} para variável.".format(tk.position[0], tk.position[1], tk.lexeme))
+            exit(-1)
+            pass
+
+    def assertConstant(variable):
+        try:
+            assert variable not in ["pi"]
+        except AssertionError:
+            print("\nstdin: Tentativa de mudança do valor de uma constante: {0}.".format(variable))
+            exit(-1)
+            pass

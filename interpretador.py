@@ -1,8 +1,7 @@
 # Eduardo Ferreira José, 2018
 #
 # - Arquivo interpretador.py
-# Arquivo contendo o main, e as funções com as regras de negócio do
-# interpretador. Onde a magia acontece!
+# Arquivo contendo o main, para chamar a biblioteca.
 
 from interpreterlib import Interpreter, Assertions
 import sys
