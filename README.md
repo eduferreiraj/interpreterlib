@@ -55,3 +55,6 @@ Nesta fase você deve integrar a análise sintática com a interpretação do pr
 #### Modo de execução:   
 • python interpretador.py ex2.calc *ou*        
 • python interpretador.py ex2.calc -s   
+
+#### Bugs conhecidos:
+• Testado, e até o momento nenhum conhecido.
