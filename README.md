@@ -53,5 +53,5 @@ Nesta fase você deve integrar a análise sintática com a interpretação do pr
 • Comentários de uma linha são válidos, utilizando a barra dupla "\\\\".   
 
 ####• Modo de execução:   
-    • python interpretador.py ex2.calc -s      
-ou  • python interpretador.py ex2.calc   
+• python interpretador.py ex2.calc *ou*        
+• python interpretador.py ex2.calc -s   
