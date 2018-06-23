@@ -20,38 +20,38 @@ Original Grammar
  Var  ::= 'x' | 'y' | 'z'  
  Num	::= [0-9]+[(.)[0-9]]+  
 
- Implemented Grammar
+ Implemented Grammar   
 
- Start = Declaration Expression {TkEnd}
- Declaration = Declaration Declaration
-         | {TkVar} {TkEqual} Expression {TkEnd}
-         | ''
- Expression = Expression [+-] Term
-         | Term
- Term = Term [\*/] Factor
-         | Factor
- Factor = Element
-         | '-' Element
- Element = Terminal
-         | Terminal '^' Factor
- Terminal = {TkNum}
-         | {TkVarAccess} {TkVar}
-         | {TkLParen} Expression {TkRParen}
+ Start = Declaration Expression {TkEnd}   
+ Declaration = Declaration Declaration   
+         | {TkVar} {TkEqual} Expression {TkEnd}   
+         | ''   
+ Expression = Expression [+-] Term   
+         | Term   
+ Term = Term [\*/] Factor   
+         | Factor   
+ Factor = Element   
+         | '-' Element   
+ Element = Terminal   
+         | Terminal '^' Factor   
+ Terminal = {TkNum}   
+         | {TkVarAccess} {TkVar}   
+         | {TkLParen} Expression {TkRParen}   
 
 
 ### 3. Interpretação com análise semântica
 Nesta fase você deve integrar a análise sintática com a interpretação do programa. E nesta fase que você também deve fazer a análise semântica das expressões e declarações de variáveis, o que pode ocorrer durante a interpretação, parecido com o que ocorre em linguagens dinamicamente tipadas. Em resumo, você deve percorrer a árvore gerada pela análise sintática e imprimir o resultado da interpretação do programa. Se existir algum problema semântico a interpretação é abortada e uma mensagem de erro deve ser exibida. O exemplo disponibilizado pelo professor mostra como integrar as fases do projeto.
 
-#### Erros:
-• divisão por zero;  
-• declaração de variável duplicada;  
-• uso de variável não declarada.  
+### Erros:
+• divisão por zero;     
+• declaração de variável duplicada;     
+• uso de variável não declarada.     
 
 ### Adicionais:
-• Variáveis podem ser definidas como palavras, não só letras
-• Opção de Shadowing pode ser ativada colocando -s na linha de comando
-• Comentários de uma linha são válidos, utilizando a barra dupla "\\\\"
+• Variáveis podem ser definidas como palavras, não só letras;   
+• Opção de Shadowing pode ser ativada colocando -s na linha de comando;   
+• Comentários de uma linha são válidos, utilizando a barra dupla "\\\\".   
 
 ####• Modo de execução:
-    • python interpretador.py ex2.calc -s   
-ou  • python interpretador.py ex2.calc
+    • python interpretador.py ex2.calc -s      
+ou  • python interpretador.py ex2.calc   
