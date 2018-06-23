@@ -4,8 +4,8 @@
 # Arquivo contendo o main, e as funções com as regras de negócio do
 # interpretador. Onde a magia acontece!
 
-from interpreterlib import Interpreter
+from interpreterlib import Interpreter, Assertions
 import sys
 
 if __name__ == "__main__":
-    Assertions.assertParameters(sys.argv)
+    Interpreter(sys.argv).execute()

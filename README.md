@@ -20,23 +20,23 @@ Original Grammar
  Var  ::= 'x' | 'y' | 'z'  
  Num	::= [0-9]+[(.)[0-9]]+  
 
-Implemented Grammar  
+ Implemented Grammar
 
-Start = Declaration Expression {TkEnd}  
-Declaration = Declaration Declaration  
-		  | {TkVar} {TkEqual} Expression {TkEnd}  
-      | ''  
-Expression = Term [+-] Expression  
-      | Term  
-Term = Factor [\*/^] Term  
-      | Factor  
-Factor = Element  
-      | '-' Element  
-Element = Terminal  
-      | Terminal '^' Factor  
-Terminal = {TkNum}  
-      | {TkVarAccess} {TkVar}  
-      | {TkOpenParentesis} Expression {TkCloseParentesis}  
+ Start = Declaration Expression {TkEnd}
+ Declaration = Declaration Declaration
+         | {TkVar} {TkEqual} Expression {TkEnd}
+         | ''
+ Expression = Expression [+-] Term
+         | Term
+ Term = Term [\*/] Factor
+         | Factor
+ Factor = Element
+         | '-' Element
+ Element = Terminal
+         | Terminal '^' Factor
+ Terminal = {TkNum}
+         | {TkVarAccess} {TkVar}
+         | {TkLParen} Expression {TkRParen}
 
 
 ### 3. Interpretação com análise semântica
@@ -46,3 +46,12 @@ Nesta fase você deve integrar a análise sintática com a interpretação do pr
 • divisão por zero;  
 • declaração de variável duplicada;  
 • uso de variável não declarada.  
+
+### Adicionais:
+• Variáveis podem ser definidas como palavras, não só letras
+• Opção de Shadowing pode ser ativada colocando -s na linha de comando
+• Comentários de uma linha são válidos, utilizando a barra dupla "\\\\"
+
+####• Modo de execução:
+    • python interpretador.py ex2.calc -s   
+ou  • python interpretador.py ex2.calc

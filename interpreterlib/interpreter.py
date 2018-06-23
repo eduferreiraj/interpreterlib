@@ -1,32 +1,38 @@
 
 
+import builtins
 from .assertions import Assertions
 from .syntaxTree import SyntaxTree
+from .config import configuration
 from .token import *
-
+import sys
 
 class Interpreter():
-    def __init__(filename):
-        self.filename = filename
+    def __init__(self, parameters):
+        configuration["shadowing"] = "-s" in parameters
+        try:
+            parameters.remove("-s")
+        except:
+            pass
+        Assertions.assertParameters(parameters)
+        self.filename = parameters[1]
 
     def lexicalAnalysis(self):
         try:
-            fs = open(filename)
+            fs = open(self.filename)
             content = fs.read()
             fs.close()
         except Exception as e:
-            raise Exception("Houve um problema ao abrir o arquivo.")
+            Assertions.assertIO()
         return tokenize(content)
 
     def syntaxAnalysis(self, tkStream):
-        for tk in tkStream:
-            print(tk)
-        # syntaxTree = SyntaxTree(tkGenerator
+        return SyntaxTree(tkStream).generate()
 
     def semanticAnalysis(self, syntaxTree):
-        return True
+        sys.stdout.write("\n> {}\n".format(syntaxTree.evaluate()))
 
     def execute(self):
         tkStream = self.lexicalAnalysis()
         syntaxTree = self.syntaxAnalysis(tkStream)
-        semanticAnalysis(syntaxTree)
+        self.semanticAnalysis(syntaxTree)

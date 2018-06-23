@@ -6,6 +6,7 @@
 
 
 from .alphabet import Alphabet
+from .assertions import Assertions
 
 tkRules = Alphabet.getRules()
 
@@ -17,9 +18,10 @@ class Token:
         self.lexeme = lexeme
 
     def __repr__(self):
-        return self.__str__()
+        return self.lexeme
+        # return "'{0}' on {1} [{2}]".format(str(self.lexeme), self.position, self.type)
     def __str__(self):
-        return "'{0}' on {1} [{2}]".format(str(self.lexeme), self.position, self.type)
+        return self.lexeme
 
 
 # Classifica um token entre os tipos mais primários (incluindo TkPoint)
@@ -55,9 +57,11 @@ def appendNextToken(tkGenerator, tkList):
 
 # Monta os Tokens finais, juntando os TkNum com TkNum, TkVar com TkVar e TkPoint junto dos TkNum
 def tokenize(content):
+    loopVariable = 0
     basicTk = basicTokenize(content)
     tkCached = []
-    while len(tkCached) < 5:
+    while len(tkCached) < 5 and loopVariable < 5:
+        loopVariable = loopVariable + 1
         appendNextToken(basicTk, tkCached)
     while len(tkCached) > 0:
         mainTk = tkCached.pop(0)

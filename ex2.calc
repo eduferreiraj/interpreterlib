@@ -1,3 +1,2 @@
-variavel = - .2; // Aaaaaaaaaa
-y = 2 * 3;
-@variavel + @y;
+variavel = 25 / 2; // Comentários funcionam!
+(2 + 2) ^ ((2 + 2)) / @variavel;

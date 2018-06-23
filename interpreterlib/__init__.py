@@ -11,3 +11,5 @@ from .alphabet import Alphabet
 from .assertions import Assertions
 from .syntaxTree import SyntaxTree
 from .interpreter import Interpreter
+
+shadowing = False
