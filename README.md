@@ -52,6 +52,6 @@ Nesta fase você deve integrar a análise sintática com a interpretação do pr
 • Opção de Shadowing pode ser ativada colocando -s na linha de comando;   
 • Comentários de uma linha são válidos, utilizando a barra dupla "\\\\".   
 
-####• Modo de execução:   
+#### Modo de execução:   
 • python interpretador.py ex2.calc *ou*        
 • python interpretador.py ex2.calc -s   
