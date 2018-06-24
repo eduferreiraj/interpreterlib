@@ -91,11 +91,11 @@ class SyntaxTree:
 
 
     def generate(self):
-        # try:
-        return self.ruleStart(self.tkList).stabilizeSpaces()
-        # except:
-            # print("\nstdin: Houve algum erro, abortando.")
-            # exit(-1)
+        try:
+            return self.ruleStart(self.tkList).stabilizeSpaces()
+        except:
+            print("\nstdin: Houve algum erro, abortando.")
+            exit(-1)
 
     # Terminal = {TkNum}
     #         | {TkVarAccess} {TkVar}
@@ -111,7 +111,6 @@ class SyntaxTree:
             return Node("Terminal").addChild(Node(tkQueue[0])).addChild(Node(tkQueue[1]))
         elif tkQueue[0].type is "TkLParen":
             closePosition = SyntaxTree.parentesisFinder(tkQueue)
-            Assertions.assertParentesis(closePosition, tkQueue[0])
             nodeExpression = self.ruleExpression(tkQueue[1:closePosition])
             return Node("Terminal").addChild(Node(tkQueue[0])).addChild(nodeExpression).addChild(Node(tkQueue[closePosition]))
         else:
@@ -190,9 +189,26 @@ class SyntaxTree:
 
     # Start = Declaration Expression {TkEnd}
     def ruleStart(self, tkQueue):
+        Assertions.assertParentesis(self.checkForParentesis(tkQueue))
         if tkQueue[-1].type is "TkEnd":
             nodeDeclaration, newTkQueue = self.ruleDeclaration(tkQueue)
             nodeExpression = self.ruleExpression(newTkQueue[:-1])
             return Node("Start").addChild(nodeDeclaration).addChild(nodeExpression).addChild(Node(tkQueue[-1]))
         else:
             Assertions.assertSemicolon(None, tkQueue[-1])
+
+    def checkForParentesis(self, tkQueue):
+        parentesisRate = 0
+        parentesisQueue = []
+        for tk in tkQueue:
+            if tk.type == "TkLParen":
+                parentesisQueue.append(tk)
+                parentesisRate = parentesisRate + 1
+            if tk.type == "TkRParen":
+                if len(parentesisQueue) == 0:
+                    return tk, False
+                parentesisQueue.pop()
+                parentesisRate = parentesisRate - 1
+        if parentesisRate == 0:
+            return None, False
+        return parentesisQueue.pop(), True

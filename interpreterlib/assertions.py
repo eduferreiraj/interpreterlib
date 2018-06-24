@@ -31,11 +31,16 @@ class Assertions:
         print("\nstdin: Houve um problema ao abrir o arquivo.")
         exit(-1)
 
-    def assertParentesis(parentesisPosition, tk):
+    def assertParentesis(error):
+        tk = error[0]
+        lastOpened = error[1]
         try:
-            assert parentesisPosition is not None
+            assert tk is None
         except AssertionError:
-            print("\nstdin: (Linha {0}, Coluna {1}) O parentesis dessa posição não está sendo fechado.".format(tk.position[0], tk.position[1]))
+            if lastOpened:
+                print("\nstdin: (Linha {0}, Coluna {1}) O parentesis dessa posição não foi fechado.".format(tk.position[0], tk.position[1]))
+            else:
+                print("\nstdin: (Linha {0}, Coluna {1}) O parentesis dessa posição não tem um recíproco.".format(tk.position[0], tk.position[1]))
             exit(-1)
 
     def assertSyntax(tokenList, tk):
