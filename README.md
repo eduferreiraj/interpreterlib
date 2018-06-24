@@ -55,6 +55,9 @@ Nesta fase você deve integrar a análise sintática com a interpretação do pr
 • Operações unárias como sqrt, cos, sin, ceil, floor podem ser utilizadas.   
 e.g.: sqrt 4, sqrt(4), ceil(@pi).    
 
+#### Bibliotecas externas:
+• math    
+• sys    
 
 #### Modo de execução:   
 • python interpretador.py ex2.calc *ou*        

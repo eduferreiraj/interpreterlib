@@ -62,7 +62,7 @@ class Assertions:
 
     def assertZeroDivision(number, tk):
         try:
-            assert number is not 0
+            assert not number == 0
         except AssertionError:
             print("\nstdin: (Linha {0}, Coluna {1}) Tentativa de divisão por zero detectada.".format(tk.position[0], tk.position[1]))
             exit(-1)

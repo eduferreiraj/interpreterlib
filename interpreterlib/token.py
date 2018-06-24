@@ -69,9 +69,10 @@ def tokenize(content):
             mainTk.lexeme = "0."
             mainTk.type = "TkNum"
         if mainTk.type == "TkNum":
-            while tkCached[0].type == "TkNum" or tkCached[0].type == "TkPoint":
-                mainTk.lexeme += tkCached.pop(0).lexeme
-                appendNextToken(basicTk, tkCached)
+            if tkCached:
+                while tkCached[0].type == "TkNum" or tkCached[0].type == "TkPoint":
+                    mainTk.lexeme += tkCached.pop(0).lexeme
+                    appendNextToken(basicTk, tkCached)
         elif mainTk.type == "TkVar":
             while tkCached and tkCached[0].type == "TkVar":
                 mainTk.lexeme += tkCached.pop(0).lexeme

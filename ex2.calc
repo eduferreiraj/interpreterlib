@@ -1,1 +1,2 @@
-floor(@pi);
+cosseno = cos 0;
+@cosseno + (- 2 * floor @pi) + sqrt (4 ^ 2);
